@@ -1,8 +1,14 @@
-import React from 'react';
+import Logo from '../components/Logo';
+import MoviesList from '../components/MoviesList';
 
 const Home = () => {
+
   return (
-    <div>Home Page</div>
+    <>
+      <Logo/>
+        <h1> EXPLORE YOUR NEXT MOVIES AND TV SHOWS</h1>
+      <MoviesList/>
+    </>
   )
 };
 
