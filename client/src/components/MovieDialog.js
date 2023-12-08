@@ -6,6 +6,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Grid,
   Paper,
   Typography,
 } from "@mui/material";
@@ -35,7 +36,7 @@ const MovieDialog = ({ open, handleClose, id }) => {
   }, [id]);
   return (
     <>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog maxWidth="md" open={open} onClose={handleClose}>
         {loading ? (
           // Show loading spinner while fetching data
           <Box p={2} display="flex" justifyContent="center">
@@ -44,50 +45,58 @@ const MovieDialog = ({ open, handleClose, id }) => {
         ) : (
           movie && (
             <>
-              <DialogTitle>{movie.title}</DialogTitle>
               <DialogContent sx={{ display: "flex" }}>
-                {/* Image on the left */}
-                <Box mr={2}>
-                  <img
-                    src={movie.image}
-                    alt={`Image for ${movie.id}`}
-                    style={{
-                      width: "150px",
-                      height: "225px",
-                      objectFit: "cover",
-                      borderRadius: "8px",
-                    }}
-                  />
-                </Box>
-                {/* Details on the right */}
-                <Box flex="1" display="flex" flexDirection="column">
-                  <Typography variant="body1">
-                    Runtime: {movie.runtime}
-                  </Typography>
-                  <Box display="flex" alignItems="center">
-                    <StarIcon />
-                    {movie.rating}/10
-                  </Box>
-                  <Typography variant="body1" sx={{ mt: 1, mb: 2 }}>
-                    {movie.synopsis}
-                  </Typography>
-                  {/* "Back to List" button */}
-                  <Paper
-                    elevation={0}
-                    sx={{
-                      mt: "auto",
-                      p: 2,
-                      backgroundColor: "#f1f1f1",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <ArrowBackIcon sx={{ mr: 1 }} />
-                    <Button onClick={handleClose} color="primary">
-                      Back to List
-                    </Button>
-                  </Paper>
-                </Box>
+                <Grid container rowSpacing={1}>
+                  <Grid item xs={12} md={8}>
+                    <img
+                      src={movie.image}
+                      alt={movie.id}
+                      style={{
+                        margin: "auto",
+                        display: "block",
+                        maxWidth: "100%",
+                        maxHeight: "100%",
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={4}>
+                    <Grid item xs container direction="column" spacing={2}>
+                      <Grid item xs>
+                        <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+                          {movie.title}
+                        </Typography>
+                      </Grid>
+
+                      <Grid item xs>
+                        <Typography variant="body1">{movie.runtime}</Typography>
+                      </Grid>
+                      <Grid item xs>
+                        <StarIcon />
+                        {movie.rating || "0"}/10
+                      </Grid>
+                      <Grid item xs>
+                        <Typography variant="body1" sx={{ mt: 1, mb: 2 }}>
+                          {movie.synopsis}
+                        </Typography>
+                      </Grid>
+
+                      <Button
+                        size="small"
+                        color="primary"
+                        variant="outlined"
+                        fullWidth
+                        onClick={handleClose}
+                        style={{
+                          borderRadius: 28,
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <ArrowBackIcon sx={{ mr: 1 }} />
+                        Back to List
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Grid>
               </DialogContent>
               {/* <DialogTitle>{movie ? movie.title : ""}</DialogTitle>
         <DialogContent>
