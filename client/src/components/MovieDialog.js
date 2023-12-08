@@ -2,12 +2,10 @@ import {
   Box,
   Button,
   CircularProgress,
+  Container,
   Dialog,
-  DialogActions,
   DialogContent,
-  DialogTitle,
   Grid,
-  Paper,
   Typography,
 } from "@mui/material";
 import React from "react";
@@ -46,67 +44,74 @@ const MovieDialog = ({ open, handleClose, id }) => {
           movie && (
             <>
               <DialogContent sx={{ display: "flex" }}>
-                <Grid container rowSpacing={1}>
-                  <Grid item xs={12} md={8}>
-                    <img
-                      src={movie.image}
-                      alt={movie.id}
-                      style={{
-                        margin: "auto",
-                        display: "block",
-                        maxWidth: "100%",
-                        maxHeight: "100%",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <Grid item xs container direction="column" spacing={2}>
-                      <Grid item xs>
-                        <Typography variant="h4" sx={{ fontWeight: "bold" }}>
-                          {movie.title}
-                        </Typography>
-                      </Grid>
-
-                      <Grid item xs>
-                        <Typography variant="body1">{movie.runtime}</Typography>
-                      </Grid>
-                      <Grid item xs>
-                        <StarIcon />
-                        {movie.rating || "0"}/10
-                      </Grid>
-                      <Grid item xs>
-                        <Typography variant="body1" sx={{ mt: 1, mb: 2 }}>
-                          {movie.synopsis}
-                        </Typography>
-                      </Grid>
-
-                      <Button
-                        size="small"
-                        color="primary"
-                        variant="outlined"
-                        fullWidth
-                        onClick={handleClose}
+                <Container maxWidth="md">
+                  <Grid container justifyContent="center" alignItems="center">
+                    <Grid item xs={12} md={5}>
+                      <img
+                        src={movie.largeimage}
+                        alt={movie.id}
                         style={{
-                          borderRadius: 28,
-                          justifyContent: "space-between",
+                          maxWidth: "100%",
+                          height: "auto",
+                          display: "block",
+                          margin: "0 auto",
                         }}
-                      >
-                        <ArrowBackIcon sx={{ mr: 1 }} />
-                        Back to List
-                      </Button>
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={7}>
+                      <Grid item xs container direction="column" spacing={2}>
+                        <Grid item xs>
+                          <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+                            {movie.title}
+                          </Typography>
+                        </Grid>
+
+                        <Grid item xs>
+                          <Typography variant="body1">
+                            {movie.runtime}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs>
+                          <Grid container alignItems="center">
+                            <Grid item>
+                              <StarIcon />
+                            </Grid>
+                            <Grid item>{movie.rating || "0"}/10</Grid>
+                          </Grid>
+                        </Grid>
+                        <Grid item xs>
+                          <Typography
+                            variant="body1"
+                            sx={{ mt: 1, mb: 2 }}
+                            dangerouslySetInnerHTML={{ __html: movie.synopsis }}
+                          ></Typography>
+                        </Grid>
+                        <Grid item xs>
+                          <Button
+                            size="small"
+                            color="primary"
+                            variant="outlined"
+                            onClick={handleClose}
+                            style={{
+                              borderRadius: 28,
+                              justifyContent: "space-between",
+                              color: "black",
+                              borderColor: "black",
+                              "&:hover": {
+                                borderColor: "black",
+                              },
+                              width: "40%",
+                            }}
+                          >
+                            <ArrowBackIcon sx={{ mr: 1 }} />
+                            Back to List
+                          </Button>
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
-                </Grid>
+                </Container>
               </DialogContent>
-              {/* <DialogTitle>{movie ? movie.title : ""}</DialogTitle>
-        <DialogContent>
-          <Typography>{movie ? movie.content : ""}</Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Close
-          </Button>
-        </DialogActions> */}
             </>
           )
         )}

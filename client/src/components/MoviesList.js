@@ -72,7 +72,6 @@ const MoviesList = () => {
             <Grid container>
               {currentItems.map((movie) => (
                 <Grid item xs={6} sm={6} md={4} lg={3} xl={2} key={movie.id}>
-                  {/* <MovieCard {...movie} /> */}
                   <Card
                     sx={{
                       boxShadow: "none",
@@ -106,6 +105,11 @@ const MoviesList = () => {
                         style={{
                           borderRadius: 28,
                           justifyContent: "space-between",
+                          color: "black",
+                          borderColor: "black",
+                          "&:hover": {
+                            borderColor: "black",
+                          }
                         }}
                       >
                         Read more
