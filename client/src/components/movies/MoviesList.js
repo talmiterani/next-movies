@@ -93,7 +93,7 @@ class MoviesList extends Component {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Grid item xs={4}>
+            <Grid item xs={9} md={4}>
               <MoviesFilter
                 searchInput={this.state.searchInput}
                 onSearchInputChange={(value) => this.setSearchInput(value)}
