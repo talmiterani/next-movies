@@ -6,13 +6,15 @@ import {
   Dialog,
   DialogContent,
   Grid,
+  IconButton,
   Typography,
 } from "@mui/material";
 import React from "react";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import StarIcon from "@mui/icons-material/Star";
+import imdb from "../../assets/imdbicon.png";
+import { getMovieApi } from "../../api/moviesApi";
 
 const MovieDialog = ({ open, handleClose, id }) => {
   const [movie, setMovie] = useState([null]);
@@ -20,20 +22,22 @@ const MovieDialog = ({ open, handleClose, id }) => {
 
   useEffect(() => {
     const getMovie = async () => {
-      if(!id) return;
+      if (!id) return;
       try {
-        const { data } = await axios.get(`http://localhost:3000/movies/${id}`);
-        setMovie(data[0]);
-      } catch (error) {
-        console.log(error);
+        const movieData = await getMovieApi(id);
+        setMovie(movieData);
       } finally {
-        console.log(movie)
         setLoading(false);
       }
     };
 
     getMovie();
   }, [id]);
+
+  const handleIMDbIconClick = (imdbid) => {
+    window.open(`https://www.imdb.com/title/${imdbid}`, "_blank");
+  };
+
   return (
     <>
       <Dialog maxWidth="md" open={open} onClose={handleClose}>
@@ -74,11 +78,23 @@ const MovieDialog = ({ open, handleClose, id }) => {
                           </Typography>
                         </Grid>
                         <Grid item xs>
-                          <Grid container alignItems="center">
+                          <Grid container alignItems="center" spacing={1}>
                             <Grid item>
                               <StarIcon />
                             </Grid>
                             <Grid item>{movie.rating || "0"}/10</Grid>
+                            <Grid item>
+                              <IconButton
+                                color="primary"
+                                size="small"
+                                sx={{ marginLeft: 1 }}
+                                onClick={() =>
+                                  handleIMDbIconClick(movie.imdbid)
+                                }
+                              >
+                                <img src={imdb} alt="imdb" />
+                              </IconButton>
+                            </Grid>
                           </Grid>
                         </Grid>
                         <Grid item xs>
@@ -88,7 +104,7 @@ const MovieDialog = ({ open, handleClose, id }) => {
                             dangerouslySetInnerHTML={{ __html: movie.synopsis }}
                           ></Typography>
                         </Grid>
-                        <Grid item xs>
+                        <Grid item xs="auto">
                           <Button
                             size="small"
                             color="primary"

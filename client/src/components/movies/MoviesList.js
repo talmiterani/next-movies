@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import {
   Grid,
   Pagination,
@@ -18,6 +17,7 @@ import { ArrowForward } from "@mui/icons-material";
 import StarIcon from "@mui/icons-material/Star";
 import MoviesFilter from "./MoviesFilter";
 import MoviesSort from "./MoviesSort";
+import { getMoviesApi } from "../../api/moviesApi";
 
 class MoviesList extends Component {
   constructor() {
@@ -34,19 +34,14 @@ class MoviesList extends Component {
     };
   }
 
-  componentDidMount() {
-    this.getMovies();
-  }
-
-  getMovies = async () => {
+  async componentDidMount() {
     try {
-      const { data } = await axios.get("http://localhost:3000/movies");
-      this.setState({ movies: data || [], loading: false });
-    } catch (error) {
-      console.log(error);
+      const moviesData = await getMoviesApi()
+      this.setState({ movies: moviesData || [] });
+    }  finally {
       this.setState({ loading: false });
     }
-  };
+  }
 
   handleOpenDialog = (movieId) => {
     this.setState({ movieId, openDialog: true });

@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, Container, Box } from "@mui/material";
+import { TextField, Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 const MoviesFilter = ({ searchInput, onSearchInputChange }) => {
