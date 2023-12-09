@@ -20,12 +20,14 @@ const MovieDialog = ({ open, handleClose, id }) => {
 
   useEffect(() => {
     const getMovie = async () => {
+      if(!id) return;
       try {
         const { data } = await axios.get(`http://localhost:3000/movies/${id}`);
         setMovie(data[0]);
       } catch (error) {
         console.log(error);
       } finally {
+        console.log(movie)
         setLoading(false);
       }
     };

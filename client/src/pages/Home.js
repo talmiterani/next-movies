@@ -1,9 +1,10 @@
 import { Toolbar, Typography, Container, Box, Grid } from "@mui/material";
 import Logo from "../components/Logo";
-import MoviesList from "../components/MoviesList";
+import MoviesList from "../components/movies/MoviesList";
 import Footer from "../components/Footer";
 
 const Home = () => {
+
   return (
     <>
       <Toolbar>
