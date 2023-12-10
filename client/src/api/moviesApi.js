@@ -8,9 +8,13 @@ export const getMoviesApi = async (id) => {
     const { data } = await axios.get("http://localhost:3000/movies");
     return data;
   } catch (error) {
-    <Alert variant="filled" severity="error">
-      Error fetching movies: {error}
-    </Alert>;
+    return (
+      <>
+        <Alert variant="filled" severity="error">
+          Error fetching movies: {error}
+        </Alert>
+      </>
+    );
   }
 };
 
@@ -19,8 +23,12 @@ export const getMovieApi = async (id) => {
     const { data } = await axios.get(`${BASE_URL}/movies/${id}`);
     return data[0];
   } catch (error) {
-    <Alert variant="filled" severity="error">
-      Error fetching movie: {error}
-    </Alert>;
-  }
+    return (
+      <>
+        <Alert variant="filled" severity="error">
+          Error fetching movies: {error}
+        </Alert>
+      </>
+    );
+  };
 };

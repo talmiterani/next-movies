@@ -15,6 +15,12 @@ i18next.use(initReactI18next).init({
         contact_us: "Contact us",
         email_support: "support@nextmovies.com",
         opening_time: "Mon – Fri | 6:00am – 5:00 pm PT",
+        sort_by: "Sort By",
+        sort_by_items: {
+          rating: "Rating",
+          released: "Released",
+          runtime: "Runtime"
+        }
       },
     },
   },

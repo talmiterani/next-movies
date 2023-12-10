@@ -18,13 +18,12 @@ import StarIcon from "@mui/icons-material/Star";
 import MoviesFilter from "./MoviesFilter";
 import MoviesSort from "./MoviesSort";
 import { getMoviesApi } from "../../api/moviesApi";
-import { withTranslation } from 'react-i18next';
+import { withTranslation } from "react-i18next";
 
 class MoviesList extends Component {
-  
   constructor() {
     super();
-   
+
     this.state = {
       movies: [],
       loading: true,
@@ -38,9 +37,9 @@ class MoviesList extends Component {
 
   async componentDidMount() {
     try {
-      const moviesData = await getMoviesApi()
+      const moviesData = await getMoviesApi();
       this.setState({ movies: moviesData || [] });
-    }  finally {
+    } finally {
       this.setState({ loading: false });
     }
   }
@@ -65,12 +64,20 @@ class MoviesList extends Component {
     this.setState({
       currentPage: 1,
       sortType: type,
-      movies: this.state.movies.sort((a, b) => b[type] - a[type]),
+      movies: this.state.movies.sort((a, b) => {
+        if(type !== "runtime") return b[type] - a[type]
+
+        // runtime type sort is different
+        const parseRuntime = (time) => {
+          const [hours, minutes] = time.split("h").map((str) => parseInt(str) || 0);
+          return hours * 60 + minutes;
+        };
+        return parseRuntime(b.runtime) - parseRuntime(a.runtime)
+      }),
     });
   }
 
   render() {
-   
     const { movies, loading, openDialog, movieId, currentPage } = this.state;
 
     const ITEMS_PER_PAGE = 16;
@@ -113,7 +120,12 @@ class MoviesList extends Component {
 
         {loading ? (
           // Show loading spinner while fetching data
-          <Box p={2} display="flex" justifyContent="center">
+          <Box
+            p={2}
+            display="flex"
+            justifyContent="center"
+            data-testid="loading-spinner"
+          >
             <CircularProgress />
           </Box>
         ) : (
@@ -136,14 +148,20 @@ class MoviesList extends Component {
                           image={movie.image}
                           title={movie.imdbid}
                         />
-                        <Typography variant="h6" sx={{ minHeight: "60px" }}>
+                        <Typography
+                          variant="h6"
+                          sx={{ minHeight: "60px" }}
+                          data-testid={`movie-title-${movie.id}`}
+                        >
                           {movie.title}
                         </Typography>
                         <Grid container alignItems="center">
                           <Grid item>
                             <StarIcon />
                           </Grid>
-                          <Grid item>{movie.rating || "0"}/10</Grid>
+                          <Grid item data-testid={`movie-rating-${movie.id}`}>
+                            {movie.rating || "0"}/10
+                          </Grid>
                         </Grid>
                       </CardContent>
                       <CardActions sx={{ padding: 2 }}>
@@ -178,9 +196,12 @@ class MoviesList extends Component {
                     page={currentPage}
                     onChange={this.handlePageChange}
                     sx={{ marginTop: 2 }}
+                    data-testid="pagination"
                   />
                 ) : (
-                  <Typography variant="h2"> {this.props.t("not_found")}</Typography>
+                  <Typography variant="h2" data-testid="not-found-message">
+                    {this.props.t("not_found")}
+                  </Typography>
                 )}
               </Box>
             </Container>
@@ -190,6 +211,7 @@ class MoviesList extends Component {
           open={openDialog}
           handleClose={this.handleCloseDialog}
           id={movieId}
+          data-testid="movie-dialog"
         />
       </>
     );

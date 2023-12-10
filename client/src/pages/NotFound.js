@@ -9,19 +9,17 @@ const NotFound = () => {
     <Container>
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100vh',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
         }}
       >
-        <Typography variant="h4" gutterBottom>
-        {t("page_not_found")}
-        </Typography>
+        <Typography variant="h4">{t("page_not_found")}</Typography>
       </Box>
     </Container>
-  )
+  );
 };
 
 export default NotFound;

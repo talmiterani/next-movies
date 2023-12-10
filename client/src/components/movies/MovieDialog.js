@@ -15,7 +15,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import StarIcon from "@mui/icons-material/Star";
 import imdb from "../../assets/imdbicon.png";
 import { getMovieApi } from "../../api/moviesApi";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const MovieDialog = ({ open, handleClose, id }) => {
   const { t } = useTranslation();
@@ -69,7 +69,11 @@ const MovieDialog = ({ open, handleClose, id }) => {
                     <Grid item xs={12} sm={7}>
                       <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
-                          <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+                          <Typography
+                            data-testid="movie-title"
+                            variant="h4"
+                            sx={{ fontWeight: "bold" }}
+                          >
                             {movie.title}
                           </Typography>
                         </Grid>
@@ -87,6 +91,7 @@ const MovieDialog = ({ open, handleClose, id }) => {
                             <Grid item>{movie.rating || "0"}/10</Grid>
                             <Grid item>
                               <IconButton
+                                name="imdb"
                                 color="primary"
                                 size="small"
                                 sx={{ marginLeft: 1 }}

@@ -7,13 +7,16 @@ import {
   IconButton,
 } from "@mui/material";
 import { ArrowDropDown, CloseRounded } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 const MovieSort = ({ sortType, onSortTypeChange }) => {
   const action = useRef(null);
+  const { t } = useTranslation();
+
 
   return (
     <FormControl variant="standard" sx={{ minWidth: 230 }}>
-      <InputLabel id="sort-label">Sort By</InputLabel>
+      <InputLabel id="sort-label">{t("sort_by")}</InputLabel>
       <Select
         action={action}
         labelId="sort-label"
@@ -44,9 +47,9 @@ const MovieSort = ({ sortType, onSortTypeChange }) => {
           return <ArrowDropDown />;
         }}
       >
-        <MenuItem value="rating">Rating</MenuItem>
-        <MenuItem value="released">Released</MenuItem>
-        <MenuItem value="runtime">Runtime</MenuItem>
+        <MenuItem value="rating">{t("sort_by_items.rating")}</MenuItem>
+        <MenuItem value="released">{t("sort_by_items.released")}</MenuItem>
+        <MenuItem value="runtime">{t("sort_by_items.runtime")}</MenuItem>
       </Select>
     </FormControl>
   );
