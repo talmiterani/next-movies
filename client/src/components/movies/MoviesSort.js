@@ -26,7 +26,7 @@ const MovieSort = ({ sortType, onSortTypeChange }) => {
         IconComponent={(props) => {
           // show icon with the color red if we are currently focused on the select box
           if (sortType) {
-            return (
+            return ( 
               <IconButton
                 size="small"
                 variant="plain"

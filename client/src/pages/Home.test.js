@@ -7,7 +7,7 @@ import Home from './Home';
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({ t: key => key }),
 }));
-
+ 
 test('renders Home component', () => {
   render(<Home />);
 

@@ -27,7 +27,7 @@ const Footer = () => {
           backgroundColor: "black",
           color: "white",
           padding: 2,
-        }}
+        }} 
       >
         <Grid container alignItems="center" direction="column">
           <Grid itempt={1} pb={1}>

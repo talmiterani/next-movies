@@ -42,7 +42,7 @@ class MoviesList extends Component {
     } finally {
       this.setState({ loading: false });
     }
-  }
+  } 
 
   handleOpenDialog = (movieId) => {
     this.setState({ movieId, openDialog: true });

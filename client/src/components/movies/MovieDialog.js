@@ -65,7 +65,7 @@ const MovieDialog = ({ open, handleClose, id }) => {
                           margin: "0 auto",
                         }}
                       />
-                    </Grid>
+                    </Grid> 
                     <Grid item xs={12} sm={7}>
                       <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>

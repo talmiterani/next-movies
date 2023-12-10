@@ -16,7 +16,7 @@ export const getMoviesApi = async (id) => {
       </>
     );
   }
-};
+}; 
 
 export const getMovieApi = async (id) => {
   try {

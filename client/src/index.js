@@ -5,7 +5,7 @@ import App from "./App";
 import "./i18n";
 
 const root = createRoot(document.getElementById("root"));
-root.render(
+root.render( 
   <StrictMode>
     <React.Suspense fallback="Loading...">
       <App />

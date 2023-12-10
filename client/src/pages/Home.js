@@ -31,7 +31,7 @@ const Home = () => {
 
         <MoviesList />
       </Box>
-      <Footer />
+      <Footer /> 
     </>
   );
 };

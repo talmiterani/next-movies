@@ -15,4 +15,4 @@ describe('MoviesList component', () => {
     // Click on the second page
     fireEvent.click(screen.getByText('2'));
   });
-});
+}); 

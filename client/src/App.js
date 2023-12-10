@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
-  return (
+  return ( 
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
