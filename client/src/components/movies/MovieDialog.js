@@ -15,8 +15,10 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import StarIcon from "@mui/icons-material/Star";
 import imdb from "../../assets/imdbicon.png";
 import { getMovieApi } from "../../api/moviesApi";
+import { useTranslation } from 'react-i18next';
 
 const MovieDialog = ({ open, handleClose, id }) => {
+  const { t } = useTranslation();
   const [movie, setMovie] = useState([null]);
   const [loading, setLoading] = useState(true);
 
@@ -122,7 +124,7 @@ const MovieDialog = ({ open, handleClose, id }) => {
                             }}
                           >
                             <ArrowBackIcon sx={{ mr: 1 }} />
-                            Back to List
+                            {t("back_to_list")}
                           </Button>
                         </Grid>
                       </Grid>

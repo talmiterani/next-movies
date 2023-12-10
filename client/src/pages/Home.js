@@ -2,9 +2,10 @@ import { Toolbar, Typography, Container, Box, Grid } from "@mui/material";
 import Logo from "../components/Logo";
 import MoviesList from "../components/movies/MoviesList";
 import Footer from "../components/Footer";
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
-
+  const { t } = useTranslation();
   return (
     <>
       <Toolbar>
@@ -22,7 +23,7 @@ const Home = () => {
                   fontWeight: "bold",
                 }}
               >
-                EXPLORE YOUR NEXT MOVIES AND TV SHOWS
+                {t("header")}
               </Typography>
             </Grid>
           </Grid>

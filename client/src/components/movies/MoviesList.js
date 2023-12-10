@@ -18,11 +18,13 @@ import StarIcon from "@mui/icons-material/Star";
 import MoviesFilter from "./MoviesFilter";
 import MoviesSort from "./MoviesSort";
 import { getMoviesApi } from "../../api/moviesApi";
+import { withTranslation } from 'react-i18next';
 
 class MoviesList extends Component {
+  
   constructor() {
     super();
-
+   
     this.state = {
       movies: [],
       loading: true,
@@ -68,6 +70,7 @@ class MoviesList extends Component {
   }
 
   render() {
+   
     const { movies, loading, openDialog, movieId, currentPage } = this.state;
 
     const ITEMS_PER_PAGE = 16;
@@ -159,7 +162,7 @@ class MoviesList extends Component {
                             },
                           }}
                         >
-                          Read more
+                          {this.props.t("read_more")}
                           <ArrowForward sx={{ mr: 1 }} />
                         </Button>
                       </CardActions>
@@ -177,7 +180,7 @@ class MoviesList extends Component {
                     sx={{ marginTop: 2 }}
                   />
                 ) : (
-                  <Typography variant="h2">Not found</Typography>
+                  <Typography variant="h2"> {this.props.t("not_found")}</Typography>
                 )}
               </Box>
             </Container>
@@ -193,4 +196,4 @@ class MoviesList extends Component {
   }
 }
 
-export default MoviesList;
+export default withTranslation()(MoviesList);
